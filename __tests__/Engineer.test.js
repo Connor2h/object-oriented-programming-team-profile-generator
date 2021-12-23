@@ -2,10 +2,10 @@ const Engineer = require("../lib/Engineer");
 
 //creates engineer object with github username
 test('creates an Engineer object with github', () =>{
-    const gitHubUserName = "connor2h"
-    const engineer = new Engineer('Dave', "1", "dave@gmail.com", gitHubUserName);
+    const github = "connor2h"
+    const engineer = new Engineer('Dave', "1", "dave@gmail.com", github);
 
-    expect(engineer.gitHubUserName).toBe(gitHubUserName);
+    expect(engineer.github).toBe(github);
 
 })
 
