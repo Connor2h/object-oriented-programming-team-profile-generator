@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 
 const employeeDatabase = [];
@@ -61,7 +62,9 @@ const promptUser = () =>{
     ]).then(managerAnswers => {
 
         let manager = new Manager(managerAnswers.managerName, managerAnswers.managerID, managerAnswers.managerEmail, managerAnswers.managerOfficeNum);
+
         employeeDatabase.push(manager);
+        console.log(employeeDatabase);
 
     })
 
@@ -74,16 +77,11 @@ const promptTeam = () =>{
             name: 'options',
             message: 'What would you like to do next? (Check only one)',
             choices: ['Add an Engineer', 'Add an Intern', 'Finish building my team']
-        },
-    ])
-}
-
-promptUser()
-    .then(promptTeam)
-    .then(optionSelect =>{
+        }
+    ]).then(optionSelect =>{
         //check which option they choose
         if(optionSelect.options[0] === "Add an Engineer"){
-            console.log("Engineer added");
+            makeEngineer()
         }
         else if(optionSelect.options[0] === "Add an Intern"){
             console.log("Intern added");
@@ -92,3 +90,139 @@ promptUser()
             console.log("finish building my team");
         }
     })
+}
+
+//creates engineer
+function makeEngineer(){
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                name: 'engineerName',
+                message: "Please enter your Engineer's name. (Required)",
+                validate: engineerName => {
+                    if(engineerName){
+                        return true
+                    }else{
+                        console.log("Please enter your Engineer's name!");
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'input',
+                name: 'engineerID',
+                message: "Please enter your Engineer's ID. (Required)",
+                validate: engineerID => {
+                    if(engineerID){
+                        return true
+                    }else{
+                        console.log("Please enter your Engineer's ID!");
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'input',
+                name: 'engineerEmail',
+                message: "Please enter your Engineer's email. (Required)",
+                validate: engineerEmail => {
+                    if(engineerEmail){
+                        return true
+                    }else{
+                        console.log("Please enter your Engineer's email!");
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'input',
+                name: 'engineerGithub',
+                message: "Please enter your Engineer's Github. (Required)",
+                validate: engineerGithub => {
+                    if(engineerGithub){
+                        return true
+                    }else{
+                        console.log("Please enter your Engineer's Github!");
+                        return false;
+                    }
+                }
+            }
+        ]).then((engineerAnswers)=>{
+            let engineer = new Engineer(engineerAnswers.engineerName, engineerAnswers.engineerID, engineerAnswers.engineerEmail, engineerAnswers.engineerGithub,);
+            employeeDatabase.push(engineer);
+            console.log(employeeDatabase);
+            promptTeam();
+            // var geneHTML = makeHTML(employeeDatabase);
+            // return writeFile(geneHTML);
+        });
+}
+
+//creates engineer
+function makeEngineer(){
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                name: 'engineerName',
+                message: "Please enter your Engineer's name. (Required)",
+                validate: engineerName => {
+                    if(engineerName){
+                        return true
+                    }else{
+                        console.log("Please enter your Engineer's name!");
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'input',
+                name: 'engineerID',
+                message: "Please enter your Engineer's ID. (Required)",
+                validate: engineerID => {
+                    if(engineerID){
+                        return true
+                    }else{
+                        console.log("Please enter your Engineer's ID!");
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'input',
+                name: 'engineerEmail',
+                message: "Please enter your Engineer's email. (Required)",
+                validate: engineerEmail => {
+                    if(engineerEmail){
+                        return true
+                    }else{
+                        console.log("Please enter your Engineer's email!");
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'input',
+                name: 'engineerGithub',
+                message: "Please enter your Engineer's Github. (Required)",
+                validate: engineerGithub => {
+                    if(engineerGithub){
+                        return true
+                    }else{
+                        console.log("Please enter your Engineer's Github!");
+                        return false;
+                    }
+                }
+            }
+        ]).then((engineerAnswers)=>{
+            let engineer = new Engineer(engineerAnswers.engineerName, engineerAnswers.engineerID, engineerAnswers.engineerEmail, engineerAnswers.engineerGithub,);
+            employeeDatabase.push(engineer);
+            console.log(employeeDatabase);
+            promptTeam();
+            // var geneHTML = makeHTML(employeeDatabase);
+            // return writeFile(geneHTML);
+        });
+}
+
+promptUser()
+    .then(promptTeam)
