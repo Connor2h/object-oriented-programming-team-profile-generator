@@ -1,8 +1,22 @@
+const Manager = require("../lib/Manager");
 
 
 //create the page template
 module.exports = templateData => {
     console.log(templateData);
+    let bodyContent = [];
+    //break down templateData array by manager, engineer, & interns
+    //use manager data to create manager card
+    //add manager card to bodyContent
+    //use eng data to create manager card
+    //add eng card to bodyContent
+    //use int data to create manager card
+    //add int card to bodyContent
+    //add bodyContent to the main tag
+    //.filter(({ feature }) => feature)
+    //bodyContent.push(templateData.filter(employee => employee.getRole() === "Manager").map(manager => generateManagerHTML(manager)));
+    bodyContent.push(templateData.filter(employee => employee.getRole() === "Engineer"));
+    console.log(bodyContent);
 
     return `
     <!DOCTYPE html>

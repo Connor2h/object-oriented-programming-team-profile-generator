@@ -7,7 +7,6 @@ const { writeFile, copyFile } = require('./utils/writeFile');
 
 const employeeDatabase = [];
 
-
 const promptUser = () =>{
     return inquirer.prompt([
         {
@@ -67,7 +66,7 @@ const promptUser = () =>{
         let manager = new Manager(managerAnswers.managerName, managerAnswers.managerID, managerAnswers.managerEmail, managerAnswers.managerOfficeNum);
 
         employeeDatabase.push(manager);
-        console.log(employeeDatabase);
+        //console.log(employeeDatabase);
 
     })
 
