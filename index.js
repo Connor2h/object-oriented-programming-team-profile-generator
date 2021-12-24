@@ -2,6 +2,8 @@ const inquirer = require('inquirer');
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
+const generatePage = require('./src/page-template');
+const { writeFile, copyFile } = require('./utils/writeFile');
 
 const employeeDatabase = [];
 
@@ -88,7 +90,9 @@ const promptTeam = () =>{
             makeIntern();
         }
         else{
-            console.log("finish building my team");
+            let htmlPage = generatePage(employeeDatabase)
+            let passFile = writeFile(htmlPage);
+            return copyFile(passFile);
         }
     })
 }
