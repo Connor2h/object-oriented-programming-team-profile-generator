@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
+const Intern = require('./lib/Intern');
 
 const employeeDatabase = [];
 
@@ -81,10 +82,10 @@ const promptTeam = () =>{
     ]).then(optionSelect =>{
         //check which option they choose
         if(optionSelect.options[0] === "Add an Engineer"){
-            makeEngineer()
+            makeEngineer();
         }
         else if(optionSelect.options[0] === "Add an Intern"){
-            console.log("Intern added");
+            makeIntern();
         }
         else{
             console.log("finish building my team");
@@ -149,78 +150,79 @@ function makeEngineer(){
                 }
             }
         ]).then((engineerAnswers)=>{
+            //create/store new Engineer object
             let engineer = new Engineer(engineerAnswers.engineerName, engineerAnswers.engineerID, engineerAnswers.engineerEmail, engineerAnswers.engineerGithub,);
             employeeDatabase.push(engineer);
-            console.log(employeeDatabase);
+
             promptTeam();
-            // var geneHTML = makeHTML(employeeDatabase);
-            // return writeFile(geneHTML);
+
         });
 }
 
 //creates engineer
-function makeEngineer(){
+function makeIntern(){
     inquirer
         .prompt([
             {
                 type: 'input',
-                name: 'engineerName',
-                message: "Please enter your Engineer's name. (Required)",
-                validate: engineerName => {
-                    if(engineerName){
+                name: 'internName',
+                message: "Please enter your Intern's name. (Required)",
+                validate: internName => {
+                    if(internName){
                         return true
                     }else{
-                        console.log("Please enter your Engineer's name!");
+                        console.log("Please enter your Intern's name!");
                         return false;
                     }
                 }
             },
             {
                 type: 'input',
-                name: 'engineerID',
-                message: "Please enter your Engineer's ID. (Required)",
-                validate: engineerID => {
-                    if(engineerID){
+                name: 'internID',
+                message: "Please enter your Intern's ID. (Required)",
+                validate: internID => {
+                    if(internID){
                         return true
                     }else{
-                        console.log("Please enter your Engineer's ID!");
+                        console.log("Please enter your Intern's ID!");
                         return false;
                     }
                 }
             },
             {
                 type: 'input',
-                name: 'engineerEmail',
-                message: "Please enter your Engineer's email. (Required)",
-                validate: engineerEmail => {
-                    if(engineerEmail){
+                name: 'internEmail',
+                message: "Please enter your Intern's email. (Required)",
+                validate: internEmail => {
+                    if(internEmail){
                         return true
                     }else{
-                        console.log("Please enter your Engineer's email!");
+                        console.log("Please enter your Intern's email!");
                         return false;
                     }
                 }
             },
             {
                 type: 'input',
-                name: 'engineerGithub',
-                message: "Please enter your Engineer's Github. (Required)",
-                validate: engineerGithub => {
-                    if(engineerGithub){
+                name: 'internSchool',
+                message: "Please enter your Intern's school. (Required)",
+                validate: internSchool => {
+                    if(internSchool){
                         return true
                     }else{
-                        console.log("Please enter your Engineer's Github!");
+                        console.log("Please enter your Intern's school!");
                         return false;
                     }
                 }
             }
-        ]).then((engineerAnswers)=>{
-            let engineer = new Engineer(engineerAnswers.engineerName, engineerAnswers.engineerID, engineerAnswers.engineerEmail, engineerAnswers.engineerGithub,);
-            employeeDatabase.push(engineer);
-            console.log(employeeDatabase);
+        ]).then((internAnswers)=>{
+            //create/store new Intern object
+            let intern = new Intern(internAnswers.internName, internAnswers.internID, internAnswers.internEmail, internAnswers.internSchool,);
+            employeeDatabase.push(intern);
+
+            //recursion to promptTeam again
             promptTeam();
-            // var geneHTML = makeHTML(employeeDatabase);
-            // return writeFile(geneHTML);
+
         });
 }
 
