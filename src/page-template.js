@@ -1,9 +1,60 @@
+const Engineer = require("../lib/Engineer");
 const Manager = require("../lib/Manager");
 
+function generateManagerHTML(manager){
+    return `
+    <div class="card" style="width: 18rem;"> 
+    <div class="card-body bg-primary text-white">
+    <h5 class="card-title">${manager.name}</h5>
+    <p class="card-text oi oi-briefcase"> ${manager.getRole()}</p>
+    </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID: ${manager.id}</li>
+            <li class="list-group-item">Email: <a href="mailto: ${manager.email}">${manager.email}</a></li>
+            <li class="list-group-item">Office number: ${manager.officeNumber}</li>
+        </ul>
+    </div>
+    `
+}
+
+function generateEngineerHTML(engineer){
+
+    return `
+    <div class="card" style="width: 18rem;"> 
+    <div class="card-body bg-primary text-white">
+    <h5 class="card-title">${engineer.name}</h5>
+    <p class="card-text oi oi-headphones"> ${engineer.getRole()}</p>
+    </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID: ${engineer.id}</li>
+            <li class="list-group-item">Email: <a href="mailto: ${engineer.email}">${engineer.email}</a></li>
+            <li class="list-group-item">Github: <a href="https://github.com/${engineer.github}" target="_blank">${engineer.github}</a></li>
+        </ul>
+    </div>
+    `
+}
+
+function generateInternHTML(intern){
+    console.log(intern)
+    return `
+    <div class="card" style="width: 18rem;"> 
+    <div class="card-body bg-primary text-white">
+    <h5 class="card-title">${intern.name}</h5>
+    <p class="card-text oi oi-headphones"> ${intern.getRole()}</p>
+    </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID: ${intern.id}</li>
+            <li class="list-group-item">Email: <a href="mailto: ${intern.email}">${intern.email}</a></li>
+            <li class="list-group-item">Github: <a href="https://github.com/${intern.github}" target="_blank">${intern.github}</a></li>
+        </ul>
+    </div>
+    `
+}
 
 //create the page template
 module.exports = templateData => {
-    console.log(templateData);
+
+    //create array to hold all of the cards
     let bodyContent = [];
     //break down templateData array by manager, engineer, & interns
     //use manager data to create manager card
@@ -14,39 +65,33 @@ module.exports = templateData => {
     //add int card to bodyContent
     //add bodyContent to the main tag
     //.filter(({ feature }) => feature)
-    //bodyContent.push(templateData.filter(employee => employee.getRole() === "Manager").map(manager => generateManagerHTML(manager)));
-    bodyContent.push(templateData.filter(employee => employee.getRole() === "Engineer"));
-    console.log(bodyContent);
+    bodyContent.push(templateData.filter(employee => employee.getRole() === "Manager").map(manager => generateManagerHTML(manager)));
+    bodyContent.push(templateData.filter(employee => employee.getRole() === "Engineer").map(engineer => generateEngineerHTML(engineer)));
+    bodyContent.push(templateData.filter(intern => intern.getRole() === "Intern").map(intern => generateInternHTML(intern)));
+    //console.log(bodyContent);
 
     return `
     <!DOCTYPE html>
     <html lang="en">
-
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Portfolio Demo</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
+        <title>My Team Generator</title>
     </head>
-
     <body>
-        <header>
-        <div class="container flex-row justify-space-between align-center py-3">
-            <h1 class="page-title text-secondary bg-dark py-2 px-3"></h1>
-            <nav class="flex-row">
-            <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="https://github.com/">GitHub</a>
-            </nav>
+        <div class="jumbotron bg-danger text-white text-center">
+            <h1 class="display-4 ">My Team</h1>
         </div>
-        </header>
-        <main class="container my-5">
-            
-        </main>
-        <footer class="container text-center py-3">
-        <h3 class="text-dark">&copy; ${new Date().getFullYear()}</h3>
-        </footer>
+
+        <div class="container">
+            <div class="row text-center justify-content-center">
+                ${bodyContent}
+            </div>
+        </div>
+
     </body>
     </html>
     `;

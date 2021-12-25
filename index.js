@@ -142,12 +142,12 @@ function makeEngineer(){
             {
                 type: 'input',
                 name: 'engineerGithub',
-                message: "Please enter your Engineer's Github. (Required)",
+                message: "Please enter your Engineer's Github username. (Required)",
                 validate: engineerGithub => {
                     if(engineerGithub){
                         return true
                     }else{
-                        console.log("Please enter your Engineer's Github!");
+                        console.log("Please enter your Engineer's Github username!");
                         return false;
                     }
                 }
