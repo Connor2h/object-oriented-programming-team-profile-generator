@@ -12,7 +12,7 @@ This project builds a Node.js command-line application that takes in information
 *Inquirer
 
 ## Website
-https://watch.screencastify.com/v/73FjmN4jB89Il3uEcuAP
+Video Link: https://watch.screencastify.com/v/73FjmN4jB89Il3uEcuAP
 
 
 ## Contribution
