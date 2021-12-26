@@ -1,6 +1,5 @@
-const Engineer = require("../lib/Engineer");
-const Manager = require("../lib/Manager");
 
+//create manager card
 function generateManagerHTML(manager){
     return `
     <div class="card" style="width: 18rem;"> 
@@ -17,6 +16,7 @@ function generateManagerHTML(manager){
     `
 }
 
+//create engineer cards
 function generateEngineerHTML(engineer){
 
     return `
@@ -34,18 +34,19 @@ function generateEngineerHTML(engineer){
     `
 }
 
+//create intern cards
 function generateInternHTML(intern){
-    console.log(intern)
+
     return `
     <div class="card" style="width: 18rem;"> 
     <div class="card-body bg-primary text-white">
     <h5 class="card-title">${intern.name}</h5>
-    <p class="card-text oi oi-headphones"> ${intern.getRole()}</p>
+    <p class="card-text oi oi-person"> ${intern.getRole()}</p>
     </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">ID: ${intern.id}</li>
             <li class="list-group-item">Email: <a href="mailto: ${intern.email}">${intern.email}</a></li>
-            <li class="list-group-item">Github: <a href="https://github.com/${intern.github}" target="_blank">${intern.github}</a></li>
+            <li class="list-group-item">School: ${intern.school}</li>
         </ul>
     </div>
     `
@@ -59,16 +60,16 @@ module.exports = templateData => {
     //break down templateData array by manager, engineer, & interns
     //use manager data to create manager card
     //add manager card to bodyContent
-    //use eng data to create manager card
+    //use eng data to create eng card
     //add eng card to bodyContent
-    //use int data to create manager card
+    //use int data to create intern card
     //add int card to bodyContent
     //add bodyContent to the main tag
-    //.filter(({ feature }) => feature)
-    bodyContent.push(templateData.filter(employee => employee.getRole() === "Manager").map(manager => generateManagerHTML(manager)));
-    bodyContent.push(templateData.filter(employee => employee.getRole() === "Engineer").map(engineer => generateEngineerHTML(engineer)));
-    bodyContent.push(templateData.filter(intern => intern.getRole() === "Intern").map(intern => generateInternHTML(intern)));
-    //console.log(bodyContent);
+    bodyContent.push(templateData.filter(employee => employee.getRole() === "Manager").map(manager => generateManagerHTML(manager)).join(''));
+    bodyContent.push(templateData.filter(employee => employee.getRole() === "Engineer").map(engineer => generateEngineerHTML(engineer)).join(''));
+    bodyContent.push(templateData.filter(intern => intern.getRole() === "Intern").map(intern => generateInternHTML(intern)).join(''));
+
+    console.log(bodyContent);
 
     return `
     <!DOCTYPE html>
