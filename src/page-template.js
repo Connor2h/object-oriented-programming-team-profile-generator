@@ -69,8 +69,6 @@ module.exports = templateData => {
     bodyContent.push(templateData.filter(employee => employee.getRole() === "Engineer").map(engineer => generateEngineerHTML(engineer)).join(''));
     bodyContent.push(templateData.filter(intern => intern.getRole() === "Intern").map(intern => generateInternHTML(intern)).join(''));
 
-    console.log(bodyContent);
-
     return `
     <!DOCTYPE html>
     <html lang="en">
